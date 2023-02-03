@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="Formulario" method="post">
+        <input type="text" name="nombre" placeholder="Nombre">
+        <br>
+        <input type="password" name="pass" placeholder="Contraseña">
+        <br>
+        <label for="sexo">Hombre</label>
+        <input type="checkbox" value="Hombre" name="sexo">
+        <br>
+        <label for="sexo">Mujer</label>
+        <input type="checkbox" value="Mujer" name="sexo">
+        <br>
+        <label for="fecha">Fecha</label>
+        <input type="date" name="fecha">
+        <br>
+        <select name="paises" multiple>
+            <option value="españa">España</option>
+            <option value="argentina">Argentina</option>
+            <option value="francia">Francia</option>
+        </select>
+        <br>
+        <input type="checkbox" value="acepto" name='acepto'>
+        <label for="acepto">¿Aceptas las condiciones de la página?</label>
+        <br>
+        <textarea name="comentarios"  cols="30" rows="5" placeholder="Escribe aqui tu comentario"></textarea>
+        <br>
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+</html>
