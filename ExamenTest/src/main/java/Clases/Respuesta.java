@@ -2,67 +2,38 @@ package Clases;
 
 
 public class Respuesta {
-	private int idRespuesta;
-	private String respuesta;
-	private int idPregunta;
+	private int id_pregunta;
+	private String texto;
 	private boolean valida;
 	
 	
-	public Respuesta(int idRespuesta, String respuesta, int idPregunta, boolean valida) {
-		this.idRespuesta = idRespuesta;
-		this.respuesta = respuesta;
-		this.idPregunta = idPregunta;
+	public Respuesta(int id_pregunta, String texto, boolean valida) {
+		this.id_pregunta = id_pregunta;
+		this.texto = texto;
 		this.valida = valida;
 	}
-
-
-	public int getIdRespuesta() {
-		return idRespuesta;
+	public int getId_pregunta() {
+		return id_pregunta;
 	}
-
-
-	public void setIdRespuesta(int idRespuesta) {
-		this.idRespuesta = idRespuesta;
+	public void setId_pregunta(int id_pregunta) {
+		this.id_pregunta = id_pregunta;
 	}
-
-
-	public String getRespuesta() {
-		return respuesta;
+	public String getTexto() {
+		return texto;
 	}
-
-
-	public void setRespuesta(String respuesta) {
-		this.respuesta = respuesta;
+	public void setTexto(String texto) {
+		this.texto = texto;
 	}
-
-
-	public int getIdPregunta() {
-		return idPregunta;
-	}
-
-
-	public void setIdPregunta(int idPregunta) {
-		this.idPregunta = idPregunta;
-	}
-
-
 	public boolean isValida() {
 		return valida;
 	}
-
-
 	public void setValida(boolean valida) {
 		this.valida = valida;
 	}
-
-
 	@Override
 	public String toString() {
-		return "Respuesta [idRespuesta=" + idRespuesta + ", respuesta=" + respuesta + ", idPregunta=" + idPregunta
-				+ ", valida=" + valida + "]";
+		return "Respuesta [id_pregunta=" + id_pregunta + ", texto=" + texto + ", valida=" + valida + "]";
 	}
-	
-	
 	
 	
 }
