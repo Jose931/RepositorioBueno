@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+    <%
+    Cookie[]miCookie = request.getCookies();
+    for
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +12,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<p>Bienvenido aprendiz</p>
+	<form action="">
+		<%=  %>
+		
+	</form>
 </body>
 </html>
