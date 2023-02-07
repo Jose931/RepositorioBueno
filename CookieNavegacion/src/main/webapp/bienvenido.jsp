@@ -3,7 +3,7 @@
     
     <%
     Cookie[]miCookie = request.getCookies();
-    for
+
     %>
 <!DOCTYPE html>
 <html>
