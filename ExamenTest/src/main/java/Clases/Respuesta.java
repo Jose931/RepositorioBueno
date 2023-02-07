@@ -5,12 +5,14 @@ public class Respuesta {
 	private int id_pregunta;
 	private String texto;
 	private boolean valida;
+	private boolean marcada;
 	
 	
-	public Respuesta(int id_pregunta, String texto, boolean valida) {
+	public Respuesta(int id_pregunta, String texto, boolean valida, boolean marcada) {
 		this.id_pregunta = id_pregunta;
 		this.texto = texto;
 		this.valida = valida;
+		this.marcada = marcada;
 	}
 	public int getId_pregunta() {
 		return id_pregunta;
@@ -29,6 +31,10 @@ public class Respuesta {
 	}
 	public void setValida(boolean valida) {
 		this.valida = valida;
+	}
+	
+	public boolean get_marcada() {
+		return marcada;
 	}
 	@Override
 	public String toString() {

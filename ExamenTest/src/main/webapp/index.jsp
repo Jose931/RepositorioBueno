@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="logica" method="post">
+	<form action="Logica" method="post">
 		<h2>Bienvenido a tu examen de tipo test</h2>
 		<input type="submit" value ="¿Emepzamos?" name=empezar>
 	</form>

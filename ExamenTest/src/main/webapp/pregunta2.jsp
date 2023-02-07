@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="Clases.Pregunta,Clases.CreaMapas,Clases.Examen , Scriptlets.*"
 	import="java.util.ArrayList"%>
-
 <%
 HttpSession miSesion = request.getSession(true);
 
 ArrayList<Pregunta> preguntas = (ArrayList<Pregunta>) miSesion.getAttribute("preguntas");
-ArrayList<String> enunciados = new ArrayList<>();
 
 int[] seleccionados = (int[]) miSesion.getAttribute("elecciones2");
 if (seleccionados == null) {

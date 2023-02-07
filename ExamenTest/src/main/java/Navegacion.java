@@ -50,15 +50,11 @@ public class Navegacion extends HttpServlet {
 		switch (pagina) {
 		case "1":
 
-			String[] eleccionesP1 = request.getParameterValues("elecciones");
-			int[] elecciones1 = convirtiendoArray(eleccionesP1, miSesion);
-			miSesion.setAttribute("elecciones1", elecciones1);
+			
 			direccion = "/pregunta2.jsp";
 			break;
 		case "2":
-			String[] eleccionesP2 = request.getParameterValues("elecciones");
-			int[] elecciones2 = convirtiendoArray(eleccionesP2, miSesion);
-			miSesion.setAttribute("elecciones2", elecciones2);
+			
 			if (navego.equals("Siguiente")) {
 				direccion = "/pregunta3.jsp";
 			} else {
@@ -67,11 +63,10 @@ public class Navegacion extends HttpServlet {
 			break;
 
 		case "3":
-			String[] eleccionesP3 = request.getParameterValues("elecciones");
-			int[] elecciones3 = convirtiendoArray(eleccionesP3, miSesion);
-			miSesion.setAttribute("elecciones3", elecciones3);
+			
 			if (navego.equals("Siguiente")) {
 				direccion = "/final.jsp";
+				
 			} else {
 				direccion = "/pregunta2.jsp";
 			}
@@ -84,7 +79,7 @@ public class Navegacion extends HttpServlet {
 	}
 
 	/**
-	 * Devuelve un array de enteros a paertir de un array de Strings
+	 * Devuelve un array de enteros a partir de un array de Strings
 	 * 
 	 * @param {{@code String [] }
 	 * @return {@code int[]}
@@ -100,14 +95,17 @@ public class Navegacion extends HttpServlet {
 
 	/**
 	 * Devuelve true si el array no esta vacio
+	 * 
 	 * @param {@code String []}
 	 * @return {@code boolean}
 	 */
 	public boolean existeEleccion(String[] elecciones) {
 		return elecciones != null ? true : false;
 	}
+
 	/**
 	 * Devuelve true si la sesion no esta vacia
+	 * 
 	 * @param {@code HttpSession, String}
 	 * @return {@code boolean}
 	 */
@@ -117,21 +115,41 @@ public class Navegacion extends HttpServlet {
 		}
 		return true;
 	}
+
 	/**
-	 * Devuelve un array de enteros dependiendo de si hay valores seleccionados, si no los hay pero hay una sesion creada con ellos o si no hay valores ni hay una sesion
+	 * Devuelve un array de enteros dependiendo de si hay valores seleccionados,si hay valores y ademas existe una sesion con una seleccion previa ,si no los hay pero hay una sesion creada con ellos o si no hay valores ni hay una sesion
 	 * @param {@code String[], HttpSessiong}
 	 * @return {@code int[]}
 	 */
-	public int[] convirtiendoArray(String[] eleccionesI, HttpSession miSesion) {
+	public int[] convirtiendoArray(String[] eleccionesI, HttpSession miSesion, String eleccionesX) {
 		int[] elecciones;
+		
 		if (existeEleccion(eleccionesI)) {
 			elecciones = cambioElecciones(eleccionesI);
-		} else if (existeSesion(miSesion, "elecciones1")) {
-			elecciones = (int[]) miSesion.getAttribute("elecciones1");
+			
+		} else if (existeSesion(miSesion, eleccionesX) ) {
+			elecciones = (int[]) miSesion.getAttribute(eleccionesX);
 		} else {
 			elecciones = new int[0];
 		}
 
 		return elecciones;
+	}
+
+	/**
+	 * 
+	 *Devuelve la suma de los arrays de elecciones de la sesion y la nueva seleccion para tener un array con la seleccion mas nueva 
+	 * @param {@code HttpSession, int[], String}
+	 * @return {@code int[]}
+	 */
+	
+	public int[] sumaArrays(HttpSession miSesion, int[] eleccionesNuevas, String eleccionesX) {
+		int[] elecciones = (int[]) miSesion.getAttribute(eleccionesX);
+		int[] eleccionesFinales = new int [elecciones.length + eleccionesNuevas.length];
+		
+		System.arraycopy(elecciones, 0, eleccionesFinales, 0, elecciones.length);
+		System.arraycopy(eleccionesNuevas, 0, eleccionesFinales, elecciones.length, eleccionesNuevas.length);
+		
+		return eleccionesFinales;
 	}
 }

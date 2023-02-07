@@ -2,11 +2,10 @@
 	pageEncoding="ISO-8859-1"
 	import="Clases.Pregunta,Clases.CreaMapas,Clases.Examen , Scriptlets.*"
 	import="java.util.ArrayList"%>
-	<%
+<%
 HttpSession miSesion = request.getSession(true);
 
 ArrayList<Pregunta> preguntas = (ArrayList<Pregunta>) miSesion.getAttribute("preguntas");
-ArrayList<String> enunciados = new ArrayList<>();
 
 int[] seleccionados = (int[]) miSesion.getAttribute("elecciones3");
 if (seleccionados == null) {
@@ -27,8 +26,8 @@ if (seleccionados == null) {
 		%>
 	</p>
 	<form action="Navegacion" method="post">
-	<%=Scriptlets.generaArrayCajasChequeo("elecciones", CreaMapas.hazMapa(preguntas, 2), seleccionados)%>
-		<input type="hidden" name="pagina" value="3">
+		<%=Scriptlets.generaArrayCajasChequeo("elecciones", CreaMapas.hazMapa(preguntas, 2), seleccionados)%>
+		<input type="hidden" name="pagina" value="3"> 
 		<input type="submit" value="Anterior" name="navegar">
 		<input type="submit" value="Siguiente" name="navegar">
 	</form>

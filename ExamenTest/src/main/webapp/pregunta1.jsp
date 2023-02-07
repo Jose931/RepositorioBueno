@@ -4,15 +4,10 @@
 	import="Clases.Pregunta,Clases.CreaMapas,Clases.Examen , Scriptlets.*"
 	import="java.util.ArrayList"%>
 <!DOCTYPE html>
-
-
 <%
 HttpSession miSesion = request.getSession(true);
 
 ArrayList<Pregunta> preguntas = (ArrayList<Pregunta>) miSesion.getAttribute("preguntas");
-ArrayList<String> enunciados = new ArrayList<>();
-
-
 
 int[] seleccionados = (int[]) miSesion.getAttribute("elecciones1");
 if (seleccionados == null) {
@@ -36,7 +31,5 @@ if (seleccionados == null) {
 		<input type="hidden" name="pagina" value = "1">
 		<input type="submit" value="Siguiente" name="navegar">
 	</form>
-	
-	
 </body>
 </html>

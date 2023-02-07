@@ -17,13 +17,13 @@ import Clases.*;;
 /**
  * Servlet implementation class logica
  */
-public class logica extends HttpServlet {
+public class Logica extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public logica() {
+	public Logica() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -150,7 +150,11 @@ public class logica extends HttpServlet {
 				.executeQuery("SELECT id_pregunta, respuesta, valida from respuestas where id_pregunta = " + num);
 		while (resp.next()) {
 			respuestas.add(
-					new Respuesta(resp.getInt("id_pregunta"), resp.getString("respuesta"), resp.getBoolean("valida")));
+					new Respuesta(
+							resp.getInt("id_pregunta"), 
+							resp.getString("respuesta"),
+							resp.getBoolean("valida"), 
+							false));
 		}
 
 		return respuestas;
