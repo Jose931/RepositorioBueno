@@ -8,6 +8,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import Clases.Pregunta;
 
 /**
  * Servlet implementation class Navegacion
@@ -46,15 +49,33 @@ public class Navegacion extends HttpServlet {
 		String navego = request.getParameter("navegar");
 		HttpSession miSesion = request.getSession(true);
 		String direccion = "";
-
+		ArrayList<Pregunta> preguntas = (ArrayList<Pregunta>) miSesion.getAttribute("preguntas");
+		
+		
+		
+		
+		
 		switch (pagina) {
 		case "1":
-
-			
+			String[] elecciones1 = request.getParameterValues("elecciones1");
+			if(elecciones1 == null) {
+				elecciones1 = new String [0];
+			}
+			int [] eleccionesP1 = cambioElecciones(elecciones1);
+			preguntas = metiendoSeleccionadas(preguntas, eleccionesP1, 0);
+			miSesion.setAttribute("eleccionesP1", eleccionesP1);
+			miSesion.setAttribute("preguntas", preguntas);
 			direccion = "/pregunta2.jsp";
 			break;
 		case "2":
-			
+			String[] elecciones2 = request.getParameterValues("elecciones2");
+			if(elecciones2 == null) {
+				elecciones2 = new String [0];
+			}
+			int [] eleccionesP2 = cambioElecciones(elecciones2);
+			preguntas = metiendoSeleccionadas(preguntas, eleccionesP2, 1);
+			miSesion.setAttribute("eleccionesP2", eleccionesP2);
+			miSesion.setAttribute("preguntas", preguntas);
 			if (navego.equals("Siguiente")) {
 				direccion = "/pregunta3.jsp";
 			} else {
@@ -63,7 +84,14 @@ public class Navegacion extends HttpServlet {
 			break;
 
 		case "3":
-			
+			String[] elecciones3 = request.getParameterValues("elecciones3");
+			if(elecciones3 == null) {
+				elecciones3 = new String [0];
+			}
+			int [] eleccionesP3 = cambioElecciones(elecciones3);
+			preguntas = metiendoSeleccionadas(preguntas, eleccionesP3, 2);
+			miSesion.setAttribute("eleccionesP3", eleccionesP3);
+			miSesion.setAttribute("preguntas", preguntas);
 			if (navego.equals("Siguiente")) {
 				direccion = "/final.jsp";
 				
@@ -74,7 +102,7 @@ public class Navegacion extends HttpServlet {
 		}
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(direccion);
 		dispatcher.forward(request, response);
-		;
+		
 
 	}
 
@@ -103,53 +131,30 @@ public class Navegacion extends HttpServlet {
 		return elecciones != null ? true : false;
 	}
 
-	/**
-	 * Devuelve true si la sesion no esta vacia
-	 * 
-	 * @param {@code HttpSession, String}
-	 * @return {@code boolean}
-	 */
-	public Boolean existeSesion(HttpSession miSesion, String pregunta) {
-		if (miSesion.getAttribute(pregunta) == null) {
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Devuelve un array de enteros dependiendo de si hay valores seleccionados,si hay valores y ademas existe una sesion con una seleccion previa ,si no los hay pero hay una sesion creada con ellos o si no hay valores ni hay una sesion
-	 * @param {@code String[], HttpSessiong}
-	 * @return {@code int[]}
-	 */
-	public int[] convirtiendoArray(String[] eleccionesI, HttpSession miSesion, String eleccionesX) {
-		int[] elecciones;
-		
-		if (existeEleccion(eleccionesI)) {
-			elecciones = cambioElecciones(eleccionesI);
-			
-		} else if (existeSesion(miSesion, eleccionesX) ) {
-			elecciones = (int[]) miSesion.getAttribute(eleccionesX);
-		} else {
-			elecciones = new int[0];
-		}
-
-		return elecciones;
-	}
-
-	/**
-	 * 
-	 *Devuelve la suma de los arrays de elecciones de la sesion y la nueva seleccion para tener un array con la seleccion mas nueva 
-	 * @param {@code HttpSession, int[], String}
-	 * @return {@code int[]}
-	 */
 	
-	public int[] sumaArrays(HttpSession miSesion, int[] eleccionesNuevas, String eleccionesX) {
-		int[] elecciones = (int[]) miSesion.getAttribute(eleccionesX);
-		int[] eleccionesFinales = new int [elecciones.length + eleccionesNuevas.length];
+	public ArrayList<Pregunta> metiendoSeleccionadas(ArrayList<Pregunta> preguntas, int[] elecciones, int pregunta){
 		
-		System.arraycopy(elecciones, 0, eleccionesFinales, 0, elecciones.length);
-		System.arraycopy(eleccionesNuevas, 0, eleccionesFinales, elecciones.length, eleccionesNuevas.length);
-		
-		return eleccionesFinales;
+//	preguntas = reseteando(preguntas, pregunta);
+		for(int i = 0; i < preguntas.get(pregunta).getRespuestas().size(); i++) {
+			
+			for (int j = 0; j < elecciones.length; j++) {
+				if(i == elecciones[j] ) {
+					preguntas.get(pregunta).getRespuestas().get(i).setMarcada(true);
+				}
+			}
+		}
+		return preguntas;
 	}
+	
+	
+	
+	public ArrayList<Pregunta> reseteando(ArrayList<Pregunta> preguntas, int pregunta){
+
+		for(int i = 0; i < preguntas.get(pregunta).getRespuestas().size(); i++) {
+			preguntas.get(pregunta).getRespuestas().get(i).setMarcada(false);
+		}
+		
+		return preguntas;
+	}
+	
 }

@@ -36,6 +36,13 @@ public class Respuesta {
 	public boolean get_marcada() {
 		return marcada;
 	}
+	
+	public boolean isMarcada() {
+		return marcada;
+	}
+	public void setMarcada(boolean marcada) {
+		this.marcada = marcada;
+	}
 	@Override
 	public String toString() {
 		return "Respuesta [id_pregunta=" + id_pregunta + ", texto=" + texto + ", valida=" + valida + "]";

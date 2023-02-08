@@ -7,6 +7,8 @@ public class Scriptlets {
 	
 	public static String generaArrayCajasChequeo(String nombreControl, Map<Integer,String> arrayValoresYEtiquetas, int[] valoresSeleccionados) {
 		String salida = "";
+		int[] prueba = new int[valoresSeleccionados.length];
+		int contador = 0;
 		int numerovaloresSeleccionados = valoresSeleccionados.length;  // cu�ntos valores seleccionados se han recibido
 		if (numerovaloresSeleccionados > 0) {  // hay alg�n valor seleccionado
 			int contadorValoresSeleccionados = 0;  // cu�ntos valores seleccionados ya se han recorrido
@@ -17,6 +19,8 @@ public class Scriptlets {
 				if ( (contadorValoresSeleccionados < numerovaloresSeleccionados) &&
 		             (valoresSeleccionados[contadorValoresSeleccionados]==clave) ) {
 					salida += "<input type=\"checkbox\" name=\"" + valor + "\" value=\"" + clave + "\" checked=\"checked\" />" + "<label>" + valor + "</label>" + "\n" + "<br>";
+					prueba[contador] = clave;
+					contador++;
 					contadorValoresSeleccionados++;
 				} else {
 					salida += "<input type=\"checkbox\" name=\"" + nombreControl + "\" value=\"" + clave + "\" />" + "<label>" + valor + "</label>" + "\n"  + "<br>";
@@ -29,7 +33,9 @@ public class Scriptlets {
 				String valor = arrayValoresYEtiquetas.get(clave);
 				salida += "<input type=\"checkbox\" name=\"" + nombreControl + "\" value=\"" + clave + "\" />" + "<label>" + valor + "</label>" + "\n"  + "<br>";
 			}    
-		}  
+		}  		
+		
+
 		return salida;
 	}
 
