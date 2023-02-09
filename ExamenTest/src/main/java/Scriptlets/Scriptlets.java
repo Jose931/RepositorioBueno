@@ -1,42 +1,84 @@
 package Scriptlets;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
+import Clases.Pregunta;
 
 public class Scriptlets {
 	
-	public static String generaArrayCajasChequeo(String nombreControl, Map<Integer,String> arrayValoresYEtiquetas, int[] valoresSeleccionados) {
+	
+	
+	public static String arrayCheckBox(String nombreControl, Map<Integer, String> arrayRespuestas,
+			int[] seleccionados) {
 		String salida = "";
-		int[] prueba = new int[valoresSeleccionados.length];
 		int contador = 0;
-		int numerovaloresSeleccionados = valoresSeleccionados.length;  // cu�ntos valores seleccionados se han recibido
-		if (numerovaloresSeleccionados > 0) {  // hay alg�n valor seleccionado
-			int contadorValoresSeleccionados = 0;  // cu�ntos valores seleccionados ya se han recorrido
-			Iterator<Integer> iteradorConjuntoClaves = arrayValoresYEtiquetas.keySet().iterator();
-			while (iteradorConjuntoClaves.hasNext()) {
-				Integer clave = iteradorConjuntoClaves.next();
-				String valor = arrayValoresYEtiquetas.get(clave);
-				if ( (contadorValoresSeleccionados < numerovaloresSeleccionados) &&
-		             (valoresSeleccionados[contadorValoresSeleccionados]==clave) ) {
-					salida += "<input type=\"checkbox\" name=\"" + valor + "\" value=\"" + clave + "\" checked=\"checked\" />" + "<label>" + valor + "</label>" + "\n" + "<br>";
-					prueba[contador] = clave;
+		int valoresSeleccionados = seleccionados.length;
+		Iterator<Integer> iteradorClaves = arrayRespuestas.keySet().iterator();
+
+		if (valoresSeleccionados > 0) {
+			while (iteradorClaves.hasNext()) {
+				String checked = "";
+				int clave = iteradorClaves.next();
+				String valor = arrayRespuestas.get(clave);
+				if ((contador < valoresSeleccionados) && (seleccionados[contador] == clave)) {
+					checked = "checked";
 					contador++;
-					contadorValoresSeleccionados++;
-				} else {
-					salida += "<input type=\"checkbox\" name=\"" + nombreControl + "\" value=\"" + clave + "\" />" + "<label>" + valor + "</label>" + "\n"  + "<br>";
-				}  
+				}
+				salida += "<input type='checkbox' name='" + nombreControl + "' value='" + clave + "' " + checked
+						+ " /><label>" + valor + "</label><br>";
 			}
 		} else {
-			Iterator<Integer> iteradorConjuntoClaves = arrayValoresYEtiquetas.keySet().iterator();
-			while (iteradorConjuntoClaves.hasNext()) {
-				Integer clave = iteradorConjuntoClaves.next();
-				String valor = arrayValoresYEtiquetas.get(clave);
-				salida += "<input type=\"checkbox\" name=\"" + nombreControl + "\" value=\"" + clave + "\" />" + "<label>" + valor + "</label>" + "\n"  + "<br>";
-			}    
-		}  		
-		
+			while (iteradorClaves.hasNext()) {
+				String checked = "";
+				int clave = iteradorClaves.next();
+				String valor = arrayRespuestas.get(clave);
+				salida += "<input type='checkbox' name='" + nombreControl + "' value='" + clave + "' " + checked + " /><label>" + valor + "</label><br>";
+			}
+		}
 
 		return salida;
 	}
+	
+	
+	
+	public static String muestrExamen(ArrayList<Pregunta> examen) {
+		String salida = "";
+		
+		for(int i = 0; i < examen.size(); i++) {
+			salida += "<div><label>" + examen.get(i).getEnunciado() +"</label>";
+			for(int j = 0; j < examen.get(i).getRespuestas().size(); j++) {
+				
+				if(examen.get(i).getRespuestas().get(j).isMarcada() && examen.get(i).getRespuestas().get(j).isValida()) {
+					
+					salida += "<div><label>" + examen.get(i).getRespuestas().get(j).getTexto() +"</label><label class = 'acierto'>Correcta</label><label>+1</label></div>";
+					
+				}else if(examen.get(i).getRespuestas().get(j).isMarcada() && !examen.get(i).getRespuestas().get(j).isValida()) {
+					
+					salida += "<div><label>" + examen.get(i).getRespuestas().get(j).getTexto() +"</label><label class = 'error'>No correcta</label><label>-0,25</label></div>";
+				}else {
+					
+					salida += "<div><label>" + examen.get(i).getRespuestas().get(j).getTexto() +"</label></div>";
+				}
+			}
+			salida += "</div>";
+		}
+		
+		return salida;
+	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

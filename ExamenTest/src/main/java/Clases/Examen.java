@@ -1,8 +1,7 @@
 package Clases;
 
 public class Examen {
-	
-	private int id_examen;
+	private String id_examen;
 	private String pregunta1;
 	private String respuesta1;
 	private String pregunta2;
@@ -10,10 +9,9 @@ public class Examen {
 	private String pregunta3;
 	private String respuesta3;
 	private double puntuacion;
-	
-	
-	public Examen(int id_examen, String pregunta1, String respuesta1, String pregunta2, String respuesta2,String pregunta3, String respuesta3, double puntuacion) {
-		
+
+	public Examen(String id_examen,String pregunta1, String respuesta1, String pregunta2, String respuesta2, String pregunta3,
+			String respuesta3, double puntuacion) {
 		this.id_examen = id_examen;
 		this.pregunta1 = pregunta1;
 		this.respuesta1 = respuesta1;
@@ -24,14 +22,10 @@ public class Examen {
 		this.puntuacion = puntuacion;
 	}
 
-	public int getId_examen() {
-		return id_examen;
+	public Examen() {
+		
 	}
-
-	public void setId_examen(int id_examen) {
-		this.id_examen = id_examen;
-	}
-
+	
 	public String getPregunta1() {
 		return pregunta1;
 	}
@@ -88,11 +82,21 @@ public class Examen {
 		this.puntuacion = puntuacion;
 	}
 
+	public String getId_examen() {
+		return id_examen;
+	}
+
+	public void setId_examen(String id_examen) {
+		this.id_examen = id_examen;
+	}
+
 	@Override
 	public String toString() {
 		return "Examen [id_examen=" + id_examen + ", pregunta1=" + pregunta1 + ", respuesta1=" + respuesta1
 				+ ", pregunta2=" + pregunta2 + ", respuesta2=" + respuesta2 + ", pregunta3=" + pregunta3
 				+ ", respuesta3=" + respuesta3 + ", puntuacion=" + puntuacion + "]";
 	}
+
+	
 
 }

@@ -17,18 +17,10 @@ int[] seleccionados = new int[size];
 
 for(int i = 0; i < preguntas.get(1).getRespuestas().size(); i++){
 	if(preguntas.get(1).getRespuestas().get(i).isMarcada() == true){
-		seleccionados[contador] = i; 
+		seleccionados[contador] = i;
+		contador++;
 	}
-}
- 
-if(seleccionados == null){
-	seleccionados = new int [0];
-}else{
-	for(int i = 0; i < seleccionados.length; i++){
-		 System.out.println(seleccionados[i]);
-	 }
-}
-
+} 
 %>
 <!DOCTYPE html>
 <html>
@@ -44,10 +36,22 @@ if(seleccionados == null){
 		%>
 	</p>
 	<form action="Navegacion" method="post">
-	<%=Scriptlets.generaArrayCajasChequeo("elecciones2", CreaMapas.hazMapa(preguntas, 1), seleccionados)%>
+	<%=Scriptlets.arrayCheckBox("elecciones2", CreaMapas.hazMapa(preguntas, 1), seleccionados)%>
 		<input type="hidden" name="pagina" value="2"> 
 		<input type="submit" value="Anterior" name="navegar"> 
 		<input type="submit" value="Siguiente" name="navegar">
 	</form>
+	
+	<p>
+	<%
+		String salida = (String)miSesion.getAttribute("salida2");
+		if(salida == null || salida.equals("")){
+			salida = "";
+			out.print(salida);
+		}else{
+			out.print(salida);
+		}
+	%>
+	</p>	
 </body>
 </html>

@@ -31,12 +31,12 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>CalculoPuntiacion</display-name>
-    <servlet-name>CalculoPuntiacion</servlet-name>
-    <servlet-class>CalculoPuntiacion</servlet-class>
+    <display-name>CalculoPuntuacion</display-name>
+    <servlet-name>CalculoPuntuacion</servlet-name>
+    <servlet-class>CalculoPuntuacion</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>CalculoPuntiacion</servlet-name>
-    <url-pattern>/CalculoPuntiacion</url-pattern>
+    <servlet-name>CalculoPuntuacion</servlet-name>
+    <url-pattern>/CalculoPuntuacion</url-pattern>
   </servlet-mapping>
 </web-app>
